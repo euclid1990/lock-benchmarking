@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+  <title>Reservation System</title>
+  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  <style>
+  table {
+    border-collapse: collapse;
+  }
+  th {
+    background-color: #dddddd;
+  }
+  td, th {
+    border: 1px solid #867b7b;
+    text-align: left;
+    padding: 8px;
+  }
+  </style>
+</head>
+<body style="margin: 0">
+  <div id="root">
+    <h1>Test concurrent requests to order ticket endpoint:</h1>
+    <ul>
+      <li>
+        <h3>1. No Lock:</h3>
+        <code>/create</code>
+      </li>
+      <li>
+        <h3>2. Database Lock</h3>
+        <code>/create/database/lockforupdate</code>
+        <div></div>
+        <code>/create/database/lockforinsert</code>
+        <div></div>
+        <code>/create/database/sharedlock</code>
+      </li>
+      <li>
+        <h3>3. Memcached Lock</h3>
+        <code>/create/memcached</code>
+      </li>
+      <li>
+        <h3>4. Redis Lock</h3>
+        <code>/create/redis</code>
+      </li>
+      <li>
+        <h3>5. RabbitMq Lock</h3>
+        <code>/create/rabbitmq</code>
+      </li>
+    </ul>
+    <h2>Booking result:</h1>
+    <div style="padding-left: 40px;">
+      <? if ($bookings->isEmpty()): ?>
+      <p>There are no booking to display.</p>
+      <?php else: ?>
+      <table>
+        <tr>
+          <th>Booking Id</th>
+          <th>Booking At</th>
+          <th>User</th>
+          <th>Movie</th>
+          <th>Screen</th>
+          <th>Seat</th>
+        </tr>
+        <?php foreach ($bookings as $booking): ?>
+        <tr>
+          <td><?= $booking->booking_id ?></td>
+          <td><?= $booking->booking_updated_at ?></td>
+          <td><?= $booking->user_name ?> (#<?= $booking->user_id ?>)</td>
+          <td><?= $booking->movie_title ?></td>
+          <td><?= $booking->screen_code ?></td>
+          <td><?= $booking->seat_code ?></td>
+        </tr>
+        <? endforeach; ?>
+      </table>
+      <?php endif;?>
+    </div>
+  </div>
+</body>
+</html>

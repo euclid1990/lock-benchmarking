@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: benchmark_php:dev
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8000:80
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./sqldata:/var/lib/mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ms_root
+      MYSQL_DATABASE: ms_database
+      MYSQL_USER: ms_user
+      MYSQL_PASSWORD: ms_password
+    ports:
+      - 3306:3306
+
+  redis:
+    image: redis:5.0.3
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.8.5
+    ports:
+      - 8001:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_DB_ENGINE=mysql
+      - PMA_HOST=mysql
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=ms_user
+      - MYSQL_PASSWORD=ms_password
+      - MYSQL_ROOT_PASSWORD=ms_root

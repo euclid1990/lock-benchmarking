@@ -1,0 +1,18 @@
+# dependencies
+.virtualenv
+node_modules
+vendor
+
+# cache files
+.cache
+
+# postgresql data
+sqldata
+pgdata
+rmqdata
+dev.sqlite3
+
+# misc
+.DS_Store
+.env
+*.log

@@ -1,0 +1,22 @@
+{
+    "name": "euclid1990/benchmark-reservation",
+    "type": "project",
+    "description": "Benchmarking Lock Technique",
+    "require": {
+        "slim/slim": "4.0.0",
+        "slim/psr7": "^0.5.0",
+        "monolog/monolog": "^1.25",
+        "slim/php-view": "^2.2",
+        "php-di/php-di": "^6.0",
+        "middlewares/trailing-slash": "^1.1",
+        "illuminate/database": "^5.8",
+        "hassankhan/config": "^2.1",
+        "symfony/console": "^4.3",
+        "fzaninotto/faker": "^1.8",
+        "illuminate/filesystem": "^5.8",
+        "illuminate/events": "^5.8",
+        "illuminate/console": "^5.8",
+        "nesbot/carbon": "^2.25",
+        "symfony/var-dumper": "^4.4"
+    }
+}
